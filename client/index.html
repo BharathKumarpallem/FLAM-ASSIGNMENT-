@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoDraw | Real-Time Collaborative Canvas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">CoDraw</div>
+            <div class="user-list-container">
+                <div id="user-list" class="user-list"></div>
+            </div>
+            <div class="actions">
+                <button id="undo-btn" title="Undo (Ctrl+Z)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"/></svg>
+                </button>
+                <button id="redo-btn" title="Redo (Ctrl+Y)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <aside class="toolbar">
+                <div class="tool-group">
+                    <label>Tools</label>
+                    <button id="brush-tool" class="active" title="Brush">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11l-2 2-5-5 2-2 5 5zM8.5 14.5l-2.5 3h4l2.5-3-4-4zM2 22l3-2.5M22 2l-3 2.5"/></svg>
+                    </button>
+                    <button id="eraser-tool" title="Eraser">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20H7L3 16C2 15 2 13 3 12L13 2C14 1 16 1 17 2L21 6C22 7 22 9 21 10L11 20M17 11l-6-6"/></svg>
+                    </button>
+                </div>
+
+                <div class="tool-group">
+                    <label>Colors</label>
+                    <div class="color-grid">
+                        <div class="color-swatch active" style="background-color: #ffffff;" data-color="#ffffff"></div>
+                        <div class="color-swatch" style="background-color: #FF5733;" data-color="#FF5733"></div>
+                        <div class="color-swatch" style="background-color: #33FF57;" data-color="#33FF57"></div>
+                        <div class="color-swatch" style="background-color: #3357FF;" data-color="#3357FF"></div>
+                        <div class="color-swatch" style="background-color: #F333FF;" data-color="#F333FF"></div>
+                        <div class="color-swatch" style="background-color: #F3FF33;" data-color="#F3FF33"></div>
+                        <div class="color-swatch" style="background-color: #33FFF3;" data-color="#33FFF3"></div>
+                        <input type="color" id="custom-color" value="#ffffff">
+                    </div>
+                </div>
+
+                <div class="tool-group">
+                    <label>Size</label>
+                    <input type="range" id="stroke-width" min="1" max="50" value="5">
+                    <span id="size-preview">5px</span>
+                </div>
+            </aside>
+
+            <div class="canvas-container">
+                <canvas id="main-canvas"></canvas>
+                <div id="cursors-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="websocket.js"></script>
+    <script src="canvas.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
